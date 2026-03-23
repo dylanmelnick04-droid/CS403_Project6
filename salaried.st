@@ -18,7 +18,7 @@ earnings
 asString
     ^ 'Salaried employee: ', (super asString),
     '
-weekly salary: ', self earnings printString,
+weekly salary: ', (self earnings asFloat roundTo: 0.01) printString,
     '
 earned: $', (self earnings asFloat roundTo: 0.01) printString.
 !

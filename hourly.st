@@ -18,7 +18,7 @@ earnings
 asString
     ^ 'Hourly employee: ', (super asString),
     '
-hours worked: ', hours printString, ', hourly rate: ', rate printString,
+hours worked: ', (hours asFloat roundTo: 0.01) printString, ', hourly rate: ', (rate asFloat roundTo: 0.01) printString,
     '
-earned: $', self earnings printString.
+earned: $', (self earnings asFloat roundTo: 0.01) printString.
 !

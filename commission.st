@@ -20,7 +20,7 @@ earnings
 asString
     ^ 'Commissioned employee: ', (super asString),
     '
-minimum salary: ', commissionMinimum printString, ', sales ammount: ', hours printString, ', commission rate: ', rate printString,
+minimum salary: ', (commissionMinimum asFloat roundTo: 0.01) printString, ', sales amount: ', (hours asFloat roundTo: 0.01) printString, ', commission rate: ', (rate asFloat roundTo: 0.01) printString,
     '%
-earned: $', self earnings printString.
+earned: $', (self earnings asFloat roundTo: 0.01) printString.
 !
