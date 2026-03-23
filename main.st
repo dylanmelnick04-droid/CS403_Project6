@@ -9,7 +9,15 @@ commandArgs := Smalltalk arguments.
 
 "open file"
 employees := OrderedCollection new.
+
+(File exists: (Smalltalk arguments at: 1))
+ifFalse: [
+    Transcript show: 'Unable to open ', (Smalltalk arguments at: 1), ' for reading'; cr.
+    ObjectMemory quit.
+].
+
 file := FileStream open: (commandArgs at: 1) mode: FileStream read.
+
 
 [file atEnd] whileFalse: [
     line := file nextLine.
@@ -75,7 +83,13 @@ commandArgs do: [ :arg |
 (count = 2 or: [count = 4 or: [count = 1]])
     ifTrue: [ "Transcript show: 'count = 2 or count = 4, pass'; cr." ]
     ifFalse: [
-        Transcript show: 'count != 2, count != 4, fail'; cr.
+        Transcript show: 'Usage: gst employee.st salaried.st hourly.st commission.st -f main.st datafile action
+or
+Usage: gst employee.st  salaried.st hourly.st commission.st -f main.st datafile action operator threshold
+
+Valid actions: count print min max total avg
+Valid operators: eq ne gt ge lt le
+        '; cr.
         ObjectMemory quit.
     ].
 file close.
@@ -164,7 +178,7 @@ eThatFitCriteria do: [ :emp |
 
 ((commandArgs at: 2) = 'total')
 ifTrue: [
-    Transcript show: totalEarnings printString; cr.
+    Transcript show: 'Total payment is $', totalEarnings printString; cr.
 ].
 
 eCount := 0.
@@ -174,7 +188,7 @@ eCount := 0.
 
 ((commandArgs at: 2) = 'count')
 ifTrue: [
-    Transcript show: eCount printString; cr.
+    Transcript show: 'There are ', eCount printString, ' employees'; cr.
 ].
 
 ((commandArgs at: 2) = 'avg')
@@ -182,7 +196,7 @@ ifTrue: [
     eAvg := totalEarnings asFloat / eCount asFloat.
     "Transcript show: totalEarnings asString; cr.
     Transcript show: eCount asString; cr."
-    Transcript show: (totalEarnings asFloat / eCount asFloat) asString; cr.
+    Transcript show: 'Average payment per employee is $', (totalEarnings asFloat / eCount asFloat) asString; cr.
 ].
 
 ((commandArgs at: 2) = 'max')
@@ -192,7 +206,7 @@ ifTrue: [
         ((emp earnings) > max)
         ifTrue: [ max := emp earnings. ].
     ].
-    Transcript show: (max printString); cr.
+    Transcript show: 'Maximum payment is $', (max printString); cr.
 ].
 
 ((commandArgs at: 2) = 'min')
@@ -202,5 +216,5 @@ ifTrue: [
         ((emp earnings) < min)
         ifTrue: [ min := emp earnings. ].
     ].
-    Transcript show: (min printString); cr.
+    Transcript show: 'Minimum payment is $', (min printString); cr.
 ].

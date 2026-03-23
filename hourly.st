@@ -17,6 +17,8 @@ earnings
 !HourlyEmployee methodsFor: 'printing'!
 asString
     ^ 'Hourly employee: ', (super asString),
-      '
-hourly salary: ', self earnings printString.
+    '
+hours worked: ', hours printString, ', hourly rate: ', rate printString,
+    '
+earned: $', self earnings printString.
 !
