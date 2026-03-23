@@ -19,6 +19,8 @@ earnings
 !CommissionedEmployee methodsFor: 'printing'!
 asString
     ^ 'Commissioned employee: ', (super asString),
-      '
-commissioned salary: ', self earnings printString.
+    '
+minimum salary: ', commissionMinimum printString, ', sales ammount: ', hours printString, ', commission rate: ', rate printString,
+    '%
+earned: $', self earnings printString.
 !
