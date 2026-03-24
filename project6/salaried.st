@@ -1,10 +1,10 @@
-Employee subclass: #HourlyEmployee
+Employee subclass: #SalariedEmployee
     instanceVariableNames: ''
     classVariableNames: ''
     poolDictionaries: ''
     category: 'Employees'.
 
-!HourlyEmployee methodsFor: 'formatting'!
+!SalariedEmployee methodsFor: 'formatting'!
 formatMoney: aNumber
     | e dollars cents |
     
@@ -15,21 +15,21 @@ formatMoney: aNumber
     ^ dollars printString, '.', ((cents < 10) ifTrue: ['0'] ifFalse: ['']), cents printString.
 !
 
-!HourlyEmployee methodsFor: 'initialization'!
+!SalariedEmployee methodsFor: 'initialization'!
 initializeWithFirst: aFirst last: aLast rate: aRate hours: aHours commissionMinimum: aCommissionMinimum
     super initializeWithFirst: aFirst last: aLast rate: aRate hours: aHours commissionMinimum: aCommissionMinimum.
 !
 
-!HourlyEmployee methodsFor: 'payroll'!
+!SalariedEmployee methodsFor: 'payroll'!
 earnings
-    ^ rate * hours.
+    ^ rate asFloat.
 !
 
-!HourlyEmployee methodsFor: 'printing'!
+!SalariedEmployee methodsFor: 'printing'!
 asString
-    ^ 'Hourly employee: ', (super asString),
+    ^ 'Salaried employee: ', (super asString),
     '
-hours worked: ', (self formatMoney: hours), ', hourly rate: ', (self formatMoney: rate),
+weekly salary: ', (self formatMoney: self earnings),
     '
 earned: $', (self formatMoney: self earnings).
 !
