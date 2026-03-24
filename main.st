@@ -196,7 +196,7 @@ ifTrue: [
     eAvg := totalEarnings asFloat / eCount asFloat.
     "Transcript show: totalEarnings asString; cr.
     Transcript show: eCount asString; cr."
-    Transcript show: 'Average payment per employee is $', (totalEarnings asFloat / eCount asFloat) asString; cr.
+    Transcript show: 'Average payment per employee is $', ((totalEarnings asFloat / eCount asFloat) roundTo: 0.01) asString; cr.
 ].
 
 ((commandArgs at: 2) = 'max')

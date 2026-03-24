@@ -22,3 +22,5 @@ hours worked: ', (hours asFloat roundTo: 0.01) printString, ', hourly rate: ', (
     '
 earned: $', (self earnings asFloat roundTo: 0.01) printString.
 !
+
+!printNl.!

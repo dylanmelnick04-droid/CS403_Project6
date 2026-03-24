@@ -24,3 +24,5 @@ minimum salary: ', (commissionMinimum asFloat roundTo: 0.01) printString, ', sal
     '%
 earned: $', (self earnings asFloat roundTo: 0.01) printString.
 !
+
+!printNl.!

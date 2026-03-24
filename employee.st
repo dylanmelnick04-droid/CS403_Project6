@@ -16,18 +16,22 @@ initializeWithFirst: aFirst last: aLast rate: aRate hours: aHours commissionMini
 !Employee methodsFor: 'accessing'!
 rate
     ^ rate.
+!
 hours
     ^ hours.
+!
 commissionMinimum
     ^ commissionMinimum.
 !
 
 !Employee methodsFor: 'printing'!
 asString
-    ^ firstName , ' ' , lastName
+    ^ firstName, ' ', lastName.
 !
 
 !Employee methodsFor: 'payroll'!
 earnings
     self subclassResponsibility.
 !
+
+!printNl.!

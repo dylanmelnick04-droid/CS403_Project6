@@ -22,3 +22,5 @@ weekly salary: ', (self earnings asFloat roundTo: 0.01) printString,
     '
 earned: $', (self earnings asFloat roundTo: 0.01) printString.
 !
+
+!printNl.!
