@@ -178,7 +178,11 @@ eThatFitCriteria do: [ :emp |
 
 ((commandArgs at: 2) = 'total')
 ifTrue: [
-    Transcript show: 'Total payment is $', totalEarnings printString; cr.
+
+    dollars := totalEarnings floor.
+    cents := (totalEarnings - dollars) * 100 asInteger.
+
+    Transcript show: 'Total payment is $', totalEarnings printString, ((cents \\ 10 = 0 ifTrue: ['0'] ifFalse: [''])); cr.
 ].
 
 eCount := 0.
@@ -194,9 +198,15 @@ ifTrue: [
 ((commandArgs at: 2) = 'avg')
 ifTrue: [
     eAvg := totalEarnings asFloat / eCount asFloat.
+    eAvg := (eAvg * 100) rounded.
+    eAvg := eAvg asFloat.
+    eAvg := eAvg / 100.
+
+    dollars := eAvg floor.
+    cents := (eAvg - dollars) * 100 asInteger.
     "Transcript show: totalEarnings asString; cr.
     Transcript show: eCount asString; cr."
-    Transcript show: 'Average payment per employee is $', ((totalEarnings asFloat / eCount asFloat) roundTo: 0.01) asString; cr.
+    Transcript show: 'Average payment per employee is $', eAvg asString, (cents \\ 10 = 0) ifTrue: ['0'] ifFalse: ['']; cr.
 ].
 
 ((commandArgs at: 2) = 'max')
@@ -206,7 +216,11 @@ ifTrue: [
         ((emp earnings) > max)
         ifTrue: [ max := emp earnings. ].
     ].
-    Transcript show: 'Maximum payment is $', (max printString); cr.
+
+    dollars := max floor.
+    cents := (max - dollars) * 100 asInteger.
+
+    Transcript show: 'Maximum payment is $', max printString, ((cents \\ 10 = 0) ifTrue: ['0'] ifFalse: ['']); cr.
 ].
 
 ((commandArgs at: 2) = 'min')
@@ -216,5 +230,8 @@ ifTrue: [
         ((emp earnings) < min)
         ifTrue: [ min := emp earnings. ].
     ].
-    Transcript show: 'Minimum payment is $', (min printString); cr.
+
+    dollars := min floor.
+    cents := (min - dollars) * 100 asInteger.
+    Transcript show: 'Minimum payment is $', min printString, ((cents \\ 10 = 0) ifTrue: ['0'] ifFalse: ['']); cr.
 ].

@@ -4,6 +4,17 @@ Employee subclass: #HourlyEmployee
     poolDictionaries: ''
     category: 'Employees'.
 
+!HourlyEmployee methodsFor: 'formatting'!
+formatMoney: aNumber
+    | e dollars cents |
+    
+    e := ((aNumber asFloat * 100) rounded) / 100.
+    dollars := e truncated.
+    cents := ((e - dollars) * 100) asInteger.
+
+    ^ dollars printString, '.', ((cents < 10) ifTrue: ['0'] ifFalse: ['']), cents printString.
+!
+
 !HourlyEmployee methodsFor: 'initialization'!
 initializeWithFirst: aFirst last: aLast rate: aRate hours: aHours commissionMinimum: aCommissionMinimum
     super initializeWithFirst: aFirst last: aLast rate: aRate hours: aHours commissionMinimum: aCommissionMinimum.
@@ -18,9 +29,9 @@ earnings
 asString
     ^ 'Hourly employee: ', (super asString),
     '
-hours worked: ', (hours asFloat roundTo: 0.01) printString, ', hourly rate: ', (rate asFloat roundTo: 0.01) printString,
+hours worked: ', (self formatMoney: hours), ', hourly rate: ', (self formatMoney: rate),
     '
-earned: $', (self earnings asFloat roundTo: 0.01) printString.
+earned: $', (self formatMoney: self earnings) printString.
 !
 
 !printNl.!

@@ -4,6 +4,17 @@ Employee subclass: #CommissionedEmployee
     poolDictionaries: ''
     category: 'Employees'.
 
+!CommissionedEmployee methodsFor: 'formatting'!
+formatMoney: aNumber
+    | e dollars cents |
+    
+    e := ((aNumber asFloat * 100) rounded) / 100.
+    dollars := e truncated.
+    cents := ((e - dollars) * 100) asInteger.
+
+    ^ dollars printString, '.', ((cents < 10) ifTrue: ['0'] ifFalse: ['']), cents printString.
+!
+
 !CommissionedEmployee methodsFor: 'initialization'!
 initializeWithFirst: aFirst last: aLast rate: aRate hours: aHours commissionMinimum: aCommissionMinimum 
     super initializeWithFirst: aFirst last: aLast rate: aRate hours: aHours commissionMinimum: aCommissionMinimum.
@@ -20,9 +31,9 @@ earnings
 asString
     ^ 'Commissioned employee: ', (super asString),
     '
-minimum salary: ', (commissionMinimum asFloat roundTo: 0.01) printString, ', sales amount: ', (hours asFloat roundTo: 0.01) printString, ', commission rate: ', (rate asFloat roundTo: 0.01) printString,
+minimum salary: ', (self formatMoney: commissionMinimum), ', sales amount: ', (self formatMoney: hours), ', commission rate: ', (self formatMoney: (rate * 100 asFloat)),
     '%
-earned: $', (self earnings asFloat roundTo: 0.01) printString.
+earned: $', (self formatMoney: self earnings).
 !
 
 !printNl.!
