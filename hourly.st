@@ -22,7 +22,29 @@ initializeWithFirst: aFirst last: aLast rate: aRate hours: aHours commissionMini
 
 !HourlyEmployee methodsFor: 'payroll'!
 earnings
-    ^ rate * hours.
+    | base mid overtime |
+
+    hours <= 40 ifTrue: [
+        ^ rate * hours
+    ].
+
+    hours <= 50 ifTrue: [
+        base := 40 * rate.
+        mid := (hours - 40) * rate * 1.5.
+        ^ base + mid
+    ].
+
+    hours <= 60 ifTrue: [
+        base := 40 * rate.
+        mid := 10 * rate * 1.5.
+        overtime := (hours - 50) * rate * 2.
+        ^ base + mid + overtime
+    ].
+
+    base := 40 * rate.
+    mid := 10 * rate * 1.5.
+    overtime := (hours - 50) * rate * 2.
+    ^ base + mid + overtime.
 !
 
 !HourlyEmployee methodsFor: 'printing'!
